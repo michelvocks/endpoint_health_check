@@ -28,6 +28,7 @@ func main() {
 	confluenceUserName := flag.String("confluence-username", "", "Username for confluence api login")
 	confluencePassword := flag.String("confluence-password", "", "Password for confluence api login")
 	HostURL = flag.String("host-url", "https://google.com", "Environment URL which should be used to test the redirect url against it")
+	flag.Parse()
 
 	// get basic auth object and pass credentials
 	basicAuth := confapi.BasicAuth(*confluenceUserName, *confluencePassword)
