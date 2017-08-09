@@ -45,6 +45,9 @@ func main() {
 		panic(err)
 	}
 
+	// print out the content for debug
+	fmt.Printf("Confluence content get: %+v\n\n", content.Body.Storage.Value)
+
 	// add html tag to beginning and end. Also create tokenizer from return string
 	bodyValue := "<html>" + content.Body.Storage.Value + "</html>"
 	z := html.NewTokenizer(strings.NewReader(bodyValue))
@@ -71,7 +74,6 @@ func main() {
 	}
 
 	// Send results back to confluence
-	fmt.Printf("Text:%+v\n\n", content.Body.Storage.Value)
 	var confluenceReturnData, singleTag string
 	var foundURL = false
 	for i := 0; i < len(content.Body.Storage.Value); i++ {
@@ -101,6 +103,9 @@ func main() {
 			singleTag = ""
 		}
 	}
+
+	// print new confluence data for debug
+	fmt.Printf("Confluence content push: %+v\n", confluenceReturnData)
 
 	// save new return value, increment version and update confluence
 	content.Body.Storage.Value = confluenceReturnData
